@@ -6,6 +6,7 @@
 package ftp;
 
 import it.sauronsoftware.ftp4j.FTPClient;
+import java.awt.Desktop;
 import java.awt.Image;
 import java.io.File;
 import javax.swing.Icon;
@@ -38,8 +39,10 @@ public class NewJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jBFtp = new javax.swing.JButton();
+        txtImagen = new javax.swing.JLabel();
+        jBLocal = new javax.swing.JButton();
+        jBPdf = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,14 +53,28 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Descargar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jBFtp.setText("Descargar desde FTP");
+        jBFtp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jBFtpActionPerformed(evt);
             }
         });
 
-        jLabel1.setToolTipText("");
+        txtImagen.setToolTipText("");
+
+        jBLocal.setText("Ver directamente");
+        jBLocal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLocalActionPerformed(evt);
+            }
+        });
+
+        jBPdf.setText("Ver PDF desde FTP");
+        jBPdf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBPdfActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -66,11 +83,14 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jBFtp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBLocal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jBPdf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addComponent(txtImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -79,12 +99,16 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jButton1)
-                        .addGap(91, 91, 91)
-                        .addComponent(jButton2))
+                        .addGap(12, 12, 12)
+                        .addComponent(jBFtp)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBLocal)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBPdf))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(48, Short.MAX_VALUE))
+                        .addGap(14, 14, 14)
+                        .addComponent(txtImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
@@ -113,7 +137,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jBFtpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFtpActionPerformed
         // TODO add your handling code here:
         try {
             
@@ -132,17 +156,76 @@ public class NewJFrame extends javax.swing.JFrame {
             
             System.out.println("FTP Successfully");
             
-            String lugarImagen="ftp://sirh.dyndns.org/Trabajadores/00014.JPG";
-            Image icon=new ImageIcon(lugarImagen).getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getWidth(), Image.SCALE_DEFAULT);
+            String lugarImagen="00014.JPG";
+            
+            Image icon= new javax.swing.ImageIcon(lugarImagen).getImage().getScaledInstance(txtImagen.getWidth(), txtImagen.getWidth(), Image.SCALE_DEFAULT);
             Icon imagen=new ImageIcon(icon);
-            jLabel1.setIcon(imagen);
-            jLabel1.setIcon(new javax.swing.ImageIcon(new URL(lugarImagen)));
+            txtImagen.setIcon(imagen);
 
         }
         catch (Exception e) {
                 e.printStackTrace();
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jBFtpActionPerformed
+
+    private void jBLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLocalActionPerformed
+        // TODO add your handling code here:
+        try {
+            
+            
+            String lugarImagen="ftp://sirh.dyndns.org/Trabajadores/00014.JPG";
+            
+            Image icon= new javax.swing.ImageIcon(new URL(lugarImagen)).getImage().getScaledInstance(txtImagen.getWidth(), txtImagen.getWidth(), Image.SCALE_DEFAULT);
+            Icon imagen=new ImageIcon(icon);
+            txtImagen.setIcon(imagen);
+
+        }
+        catch (Exception e) {
+                e.printStackTrace();
+        }
+    }//GEN-LAST:event_jBLocalActionPerformed
+
+    private void jBPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPdfActionPerformed
+        // TODO add your handling code here:
+        try{
+            
+            String lugarImagen="ftp://sirh.dyndns.org/ManualUsuarioGR.pdf";
+            
+            URL url1= new URL(lugarImagen);
+            
+            byte[] ba1 = new byte[1024];
+            int baLength;
+            File pdfFile =new File("ManualUsuarioGR.pdf");
+            FileOutputStream fos1 = new FileOutputStream(pdfFile);
+            
+            URLConnection urlConn = url1.openConnection();
+            
+            InputStream is1 = url1.openStream();
+            while ((baLength = is1.read(ba1)) != -1) {
+                fos1.write(ba1, 0, baLength);
+            }
+            fos1.flush();
+            fos1.close();
+            is1.close();
+            
+            
+            if (pdfFile.exists()) {
+                
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().open(pdfFile);
+                } else {
+                    System.out.println("Awt Desktop is not supported!");
+                }
+                
+            } else {
+                System.out.println("The file does't exists!");
+            }
+            
+        }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_jBPdfActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,8 +263,10 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBFtp;
+    private javax.swing.JButton jBLocal;
+    private javax.swing.JButton jBPdf;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel txtImagen;
     // End of variables declaration//GEN-END:variables
 }
